@@ -10,7 +10,7 @@ import (
 
 func checkError(err error, t *testing.T) {
 	if err != nil {
-		t.Errorf("An error occurred. %v", err)
+		t.Errorf("An error occurred. %s", err)
 	}
 }
 
@@ -26,16 +26,14 @@ func TestMetricsHandler(t *testing.T) {
 	var m = initDummyManager()
 	// initialize request object
 	req, err := http.NewRequest("GET", "/health-check", nil)
-	if err != nil {
-		t.Fatal(err)
-	}
+	checkError(err, t)
 	rr := httptest.NewRecorder()
 	// call the collect method
 	handler := http.HandlerFunc(m.Collect())
 	handler.ServeHTTP(rr, req)
 
 	// Assert whether status code is 200 OK.
-	assert.Equal(t, rr.Code, http.StatusOK, "Status code should be 200")
+	assert.Equal(t, rr.Code, http.StatusOK, "Status code differs")
 	// Assert whether response body is what we expect.
 	expected := `test_app{service="dummy"} 1`
 	assert.Contains(t, rr.Body.String(), expected, "Response body differs")

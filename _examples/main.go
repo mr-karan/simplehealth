@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"math/rand"
 	"net/http"
 	"time"
@@ -23,7 +24,10 @@ func dumbHealthCheck() bool {
 
 func main() {
 	// initialize manager
-	var m = exporter.NewManager("my_app_health", kvs, false)
+	var m, err = exporter.NewManager(kvs, exporter.Options{ExpositionFormat: "json"})
+	if err != nil {
+		panic(fmt.Errorf("error registering manager %s", err))
+	}
 	// Default index handler.
 	handleIndex := http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		w.WriteHeader(http.StatusOK)
