@@ -6,7 +6,7 @@ import (
 	"net/http"
 	"time"
 
-	exporter "github.com/mr-karan/healthexporter"
+	"github.com/mr-karan/simplehealth"
 	"github.com/prometheus/common/log"
 )
 
@@ -24,14 +24,14 @@ func dumbHealthCheck() bool {
 
 func main() {
 	// initialize manager
-	var m, err = exporter.NewManager(kvs, exporter.Options{ExpositionFormat: "json"})
+	var m, err = simplehealth.NewManager(kvs, simplehealth.Options{ExpositionFormat: "prometheus"})
 	if err != nil {
 		panic(fmt.Errorf("error registering manager %s", err))
 	}
 	// Default index handler.
 	handleIndex := http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		w.WriteHeader(http.StatusOK)
-		w.Write([]byte("Welcome to healthexporter. Visit /metrics to scrape prometheus metrics."))
+		w.Write([]byte("Welcome to simplehealth. Visit /metrics to scrape prometheus metrics."))
 	})
 	// Initialize router and define all endpoints.
 	router := http.NewServeMux()

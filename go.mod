@@ -1,4 +1,4 @@
-module github.com/mr-karan/healthexporter
+module github.com/mr-karan/simplehealth
 
 go 1.12
 

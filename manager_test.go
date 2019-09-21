@@ -1,4 +1,4 @@
-package healthexporter
+package simplehealth
 
 import (
 	"net/http"
