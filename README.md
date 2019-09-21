@@ -1,6 +1,8 @@
 # simplehealth
 > Expose health check endpoints as Prometheus/JSON format in seconds 💫
 
+[![GoDoc](https://godoc.org/github.com/mr-karan/simplehealth?status.svg)](http://godoc.org/github.com/mr-karan/simplehealth)
+
 ## Overview
 `simplehealth` makes it ridiculously easy to expose health checks in your Go service. It is a tiny abstraction over [VictoriaMetrics/metrics](https://github.com/VictoriaMetrics/metrics) which is a lightweight alternative to the official Prometheus [client](https://github.com/prometheus/client_golang) library.
 
