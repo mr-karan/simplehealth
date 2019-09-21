@@ -48,6 +48,9 @@ func NewManager(ms map[string]func() bool, opts Options) (Manager, error) {
 	}
 	// Validate format value
 	err := validateFormat(t.opts.ExpositionFormat)
+	if err != nil {
+		return nil, err
+	}
 	return t, err
 }
 
